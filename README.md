@@ -2,5 +2,5 @@
 
 miro (https://miro.com/app/board/uXjVPRc-5Mc=/)
 
-Diagrammes : 
+Diagrammes, prototype, storyboard, etc ... sont dans le wiki : 
 https://github.com/8INF853-ArchitectureAppEntreprise/ProjetPratique1/wiki
