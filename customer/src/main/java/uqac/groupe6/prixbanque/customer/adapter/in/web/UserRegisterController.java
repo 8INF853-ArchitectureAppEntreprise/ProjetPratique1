@@ -1,29 +1,29 @@
-package adapter.controller;
+package uqac.groupe6.prixbanque.customer.adapter.in.web;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import usecase.CustomerRequestModel;
-import usecase.CustomerResponseModel;
-import usecase.UserRegisterInteractor;
+import lombok.RequiredArgsConstructor;
+import uqac.groupe6.prixbanque.customer.usecase.CustomerRegisterService;
+import uqac.groupe6.prixbanque.customer.usecase.CustomerResponseModel;
+import uqac.groupe6.prixbanque.customer.usecase.port.in.requestModel.CustomerRequestModel;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Controller
 @RestController
 @RequestMapping("/customer")
+@RequiredArgsConstructor
 class UserRegisterController {
 
-	private UserRegisterInteractor userInput;
+	private final CustomerRegisterService customerRegisterService;
 
 	@PostMapping
 	CustomerResponseModel create(@RequestBody CustomerRequestModel requestModel) {
 		System.out.println("Ookkk");
-		return userInput.create(requestModel);
+		return customerRegisterService.register(requestModel);
 	}
 
 	@GetMapping("/toto")

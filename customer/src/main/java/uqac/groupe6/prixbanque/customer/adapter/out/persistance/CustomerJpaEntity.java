@@ -1,14 +1,14 @@
-package adapter.repository;
+package uqac.groupe6.prixbanque.customer.adapter.out.persistance;
 
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import domain.entities.Account;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -18,11 +18,11 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "customer")
 class CustomerJpaEntity {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	@NonNull
@@ -44,6 +44,4 @@ class CustomerJpaEntity {
 	@NonNull
 	private String phoneNumber;
 
-	@NonNull
-	private Account Account;
 }

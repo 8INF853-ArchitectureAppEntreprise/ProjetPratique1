@@ -1,4 +1,4 @@
-package domain.entities;
+package uqac.groupe6.prixbanque.customer.usecase.port.in.requestModel;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,13 +7,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Customer {
-
-	private long id;
+public class CustomerRequestModel {
 	private String email;
 	private String password;
 	private String firstName;
 	private String lastName;
 	private String phoneNumber;
-	private Account Account;
 }

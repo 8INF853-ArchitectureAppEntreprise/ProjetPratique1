@@ -1,25 +1,27 @@
-package adapter.repository;
+package uqac.groupe6.prixbanque.customer.adapter.out.persistance;
 
 import java.time.LocalDateTime;
 
-import adapter.repository.requestModel.CustomerRepositoryDTO;
-import domain.entities.Account;
+import org.springframework.stereotype.Service;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import usecase.port.UserRegisterGateway;
+import uqac.groupe6.prixbanque.customer.adapter.out.persistance.requestModel.CustomerRepositoryDTO;
+import uqac.groupe6.prixbanque.customer.usecase.port.out.CustomerRegisterPort;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class UserRegisterGatewayImpl implements UserRegisterGateway {
+@Service
+public class CustomerPersistanceAdapter implements CustomerRegisterPort {
 
-	private CustomerDAO jpaUserRepository;
+	private CustomerRepository jpaUserRepository;
 
 	public void save(CustomerRepositoryDTO customerRepositoryDTO) {
 		CustomerJpaEntity customerJpaEntity = new CustomerJpaEntity(customerRepositoryDTO.getEmail(),
 				customerRepositoryDTO.getPassword(), LocalDateTime.now(), customerRepositoryDTO.getFirstName(),
-				customerRepositoryDTO.getLastName(), customerRepositoryDTO.getPhoneNumber(), new Account());
+				customerRepositoryDTO.getLastName(), customerRepositoryDTO.getPhoneNumber());
 
 		jpaUserRepository.save(customerJpaEntity);
 	}
