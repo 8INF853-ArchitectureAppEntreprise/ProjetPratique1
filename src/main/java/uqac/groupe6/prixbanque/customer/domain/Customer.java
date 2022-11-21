@@ -1,4 +1,4 @@
-package uqac.groupe6.prixbanque.domain;
+package uqac.groupe6.prixbanque.customer.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

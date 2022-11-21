@@ -1,4 +1,4 @@
-package uqac.groupe6.prixbanque.controller;
+package uqac.groupe6.prixbanque.customer.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
-import uqac.groupe6.prixbanque.usecase.RegisterCustomerDTO;
-import uqac.groupe6.prixbanque.usecase.RegisterCustomerService;
+import uqac.groupe6.prixbanque.customer.usecase.RegisterCustomerDTO;
+import uqac.groupe6.prixbanque.customer.usecase.RegisterCustomerService;
 
 @RestController
 @RequestMapping("/customer")

@@ -1,4 +1,4 @@
-package uqac.groupe6.prixbanque.usecase;
+package uqac.groupe6.prixbanque.customer.usecase;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

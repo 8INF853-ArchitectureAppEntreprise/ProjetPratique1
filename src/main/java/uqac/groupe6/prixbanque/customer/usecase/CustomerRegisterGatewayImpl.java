@@ -1,4 +1,4 @@
-package uqac.groupe6.prixbanque.usecase;
+package uqac.groupe6.prixbanque.customer.usecase;
 
 import java.time.LocalDateTime;
 
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import uqac.groupe6.prixbanque.persistance.CustomerJpaEntity;
-import uqac.groupe6.prixbanque.persistance.CustomerJpaRepository;
+import uqac.groupe6.prixbanque.customer.persistance.CustomerJpaEntity;
+import uqac.groupe6.prixbanque.customer.persistance.CustomerJpaRepository;
 
 @Getter
 @Setter

@@ -1,4 +1,4 @@
-package uqac.groupe6.prixbanque.persistance;
+package uqac.groupe6.prixbanque.customer.persistance;
 
 import java.util.Optional;
 
