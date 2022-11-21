@@ -1,12 +1,12 @@
-package uqac.groupe6.prixbanque.customer.persistance;
+package uqac.groupe6.prixbanque.account.persistance;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -14,35 +14,26 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import uqac.groupe6.prixbanque.customer.persistance.CustomerJpaEntity;
 
 @Getter
 @Setter
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "customer")
-public class CustomerJpaEntity {
-
+@Table(name = "account")
+public class AccountJpaEntiry {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private long id;
 
 	@NonNull
-	@Column(unique = true)
-	private String email;
+	@ManyToOne
+	private CustomerJpaEntity idCustomer;
 
 	@NonNull
-	private String password;
+	private String name;
 
 	@NonNull
-	private LocalDateTime creationTime;
-
-	@NonNull
-	private String firstName;
-
-	@NonNull
-	private String lastName;
-
-	@NonNull
-	private String phoneNumber;
+	private LocalDateTime createdAt;
 }
