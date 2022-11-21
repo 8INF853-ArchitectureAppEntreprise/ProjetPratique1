@@ -1,17 +1,18 @@
-package uqac.groupe6.prixbanque.customer.domain;
+package uqac.groupe6.prixbanque.usecase;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class Customer {
-
-	private long id;
+@NoArgsConstructor
+public class RegisterCustomerDTO {
 	private String email;
 	private String password;
+	private String matchedPassword;
 	private String firstName;
 	private String lastName;
 	private String phoneNumber;

@@ -1,4 +1,4 @@
-package uqac.groupe6.prixbanque.customer.adapter.out.persistance;
+package uqac.groupe6.prixbanque.persistance;
 
 import java.time.LocalDateTime;
 
@@ -19,11 +19,11 @@ import lombok.Setter;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "customer")
-class CustomerJpaEntity {
+public class CustomerJpaEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	@NonNull
 	@Column(unique = true)
@@ -43,5 +43,4 @@ class CustomerJpaEntity {
 
 	@NonNull
 	private String phoneNumber;
-
 }
