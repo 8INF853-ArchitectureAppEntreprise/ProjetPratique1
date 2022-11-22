@@ -1,8 +1,11 @@
 package uqac.groupe6.prixbanque.account.usecase;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
+import uqac.groupe6.prixbanque.account.domain.Account;
 
 @Service
 @AllArgsConstructor
@@ -16,15 +19,19 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public void loadOne(AccountRequestModel requestModel) {
-		// TODO Auto-generated method stub
-
+	public AccountResponseModel loadOne(AccountRequestModel requestModel) {
+		Account account = accountGateway.getOne(requestModel.getIdCustomer(), requestModel.getIdAccount());
+		return accountToResponseModel(account);
 	}
 
 	@Override
-	public void loadAdd(AccountRequestModel requestModel) {
-		// TODO Auto-generated method stub
+	public List<AccountResponseModel> loadAll(AccountRequestModel requestModel) {
+		List<Account> customerAccounts = accountGateway.getAll(requestModel.getIdCustomer());
 
+		return customerAccounts.stream().map(account -> accountToResponseModel(account)).toList();
 	}
 
+	private AccountResponseModel accountToResponseModel(Account account) {
+		return AccountResponseModel.builder().name(account.getName()).build();
+	}
 }

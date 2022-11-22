@@ -22,14 +22,14 @@ import uqac.groupe6.prixbanque.customer.persistance.CustomerJpaEntity;
 @NoArgsConstructor
 @Entity
 @Table(name = "account")
-public class AccountJpaEntiry {
+public class AccountJpaEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	@NonNull
 	@ManyToOne
-	private CustomerJpaEntity idCustomer;
+	private CustomerJpaEntity customer;
 
 	@NonNull
 	private String name;

@@ -1,9 +1,11 @@
 package uqac.groupe6.prixbanque.account.usecase;
 
+import java.util.List;
+
 public interface AccountService {
 	public void create(AccountRequestModel requestModel);
 
-	public void loadOne(AccountRequestModel requestModel);
+	public AccountResponseModel loadOne(AccountRequestModel requestModel);
 
-	public void loadAdd(AccountRequestModel requestModel);
+	public List<AccountResponseModel> loadAll(AccountRequestModel requestModel);
 }

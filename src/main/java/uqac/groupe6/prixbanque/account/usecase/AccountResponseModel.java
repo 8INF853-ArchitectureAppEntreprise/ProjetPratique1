@@ -1,14 +1,14 @@
 package uqac.groupe6.prixbanque.account.usecase;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
+@Builder
 @AllArgsConstructor
-public class AccountRequestModel {
-	private Long idCustomer;
-	private Long idAccount;
+public class AccountResponseModel {
 	private String name;
 }
