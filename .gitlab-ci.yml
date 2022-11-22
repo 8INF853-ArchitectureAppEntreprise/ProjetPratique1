@@ -1,9 +1,0 @@
-stages:
-  - build
-
-java-build:
-  # select the most appropriate image for your project
-  image: maven:3.8.3-openjdk-17
-  stage: build
-  script:
-    - mvn package -DskipTests=False
