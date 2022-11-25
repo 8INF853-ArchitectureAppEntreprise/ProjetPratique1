@@ -8,6 +8,7 @@
 	<packaging>pom</packaging>
 	<description>Demo project for Spring Boot</description>
 	<properties>
+		<microservice.version>0.0.1-SNAPSHOT</microservice.version>
 		<java.version>17</java.version>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
@@ -23,7 +24,31 @@
 	</modules>
 
 	<dependencyManagement>
+
 		<dependencies>
+			<!-- MicroServices-->
+			<dependency>
+				<groupId>uqac.groupe6</groupId>
+				<artifactId>registration</artifactId>
+				<version>${microservice.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>uqac.groupe6</groupId>
+				<artifactId>connection</artifactId>
+				<version>${microservice.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>uqac.groupe6</groupId>
+				<artifactId>banktransfert</artifactId>
+				<version>${microservice.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>uqac.groupe6</groupId>
+				<artifactId>bankaccount</artifactId>
+				<version>${microservice.version}</version>
+			</dependency>
+
+
 			<!-- Spring -->
 			<dependency>
 				<groupId>org.springframework.boot</groupId>

@@ -9,6 +9,12 @@
 
 
 	<dependencies>
+		<!-- MicroService -->
+		<dependency>
+			<groupId>uqac.groupe6</groupId>
+			<artifactId>connection</artifactId>
+		</dependency>
+	
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
