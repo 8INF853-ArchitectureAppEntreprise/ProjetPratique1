@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import uqac.groupe6.bankaccount.usecase.AccountRequestModel;
 import uqac.groupe6.bankaccount.usecase.AccountResponseModel;
 import uqac.groupe6.bankaccount.usecase.AccountService;
+import uqac.groupe6.bankaccount.usecase.exception.AccountNameAlreadyExistException;
 
 @RestController
 @RequestMapping("/account")
@@ -22,8 +23,8 @@ public class AccountController {
 
 	private final AccountService accountService;
 
-	@PostMapping("/register")
-	public void create(@RequestBody AccountRequestModel requestModel) {
+	@PostMapping("/create")
+	public void create(@RequestBody AccountRequestModel requestModel) throws AccountNameAlreadyExistException {
 		accountService.create(requestModel);
 	}
 

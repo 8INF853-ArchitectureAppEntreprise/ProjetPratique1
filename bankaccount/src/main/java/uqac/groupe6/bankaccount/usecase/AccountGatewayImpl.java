@@ -34,7 +34,9 @@ public class AccountGatewayImpl implements AccountGateway {
 	public Account getOne(Long idCustomer, Long idAccount) {
 		CustomerJpaEntity customerJpaEntity = customerJpaRepository.getById(idCustomer);
 
-		return accountJpaRepository.findByIdAndCustomer(idAccount, customerJpaEntity);
+		return null;
+		// return accountJpaRepository.findByIdAndCustomer(idAccount,
+		// customerJpaEntity);
 	}
 
 	@Override
@@ -48,6 +50,15 @@ public class AccountGatewayImpl implements AccountGateway {
 
 	private Account jpaToDomain(AccountJpaEntity jpaEntity) {
 		return Account.builder().name(jpaEntity.getName()).build();
+	}
+
+	@Override
+	public Account findByCustomer_IdAndByName(Long idCustomer, String name) {
+		CustomerJpaEntity customerJpaEntity = customerJpaRepository.getById(idCustomer);
+
+		AccountJpaEntity toReturn = accountJpaRepository.findByCustomer_IdAndByName(customerJpaEntity, name);
+
+		return Account.builder().name(toReturn.getName()).build();
 	}
 
 }

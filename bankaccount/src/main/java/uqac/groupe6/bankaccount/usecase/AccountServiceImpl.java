@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 import uqac.groupe6.bankaccount.domain.Account;
+import uqac.groupe6.bankaccount.usecase.exception.AccountNameAlreadyExistException;
 
 @Service
 @AllArgsConstructor
@@ -14,7 +15,14 @@ public class AccountServiceImpl implements AccountService {
 	private final AccountGateway accountGateway;
 
 	@Override
-	public void create(AccountRequestModel requestModel) {
+	public void create(AccountRequestModel requestModel) throws AccountNameAlreadyExistException {
+		Account accountAlreadyExist = accountGateway.findByCustomer_IdAndByName(requestModel.getIdCustomer(),
+				requestModel.getName());
+
+		if (accountAlreadyExist.getName().equals(requestModel.getName())) {
+			throw new AccountNameAlreadyExistException("Account with name " + requestModel.getName() + "already exist");
+		}
+
 		accountGateway.create(requestModel.getIdCustomer(), requestModel.getName());
 	}
 
