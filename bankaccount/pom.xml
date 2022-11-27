@@ -14,6 +14,10 @@
 			<groupId>uqac.groupe6</groupId>
 			<artifactId>connection</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>uqac.groupe6</groupId>
+			<artifactId>registration</artifactId>
+		</dependency>
 	
 		<!-- Spring -->
 		<dependency>
