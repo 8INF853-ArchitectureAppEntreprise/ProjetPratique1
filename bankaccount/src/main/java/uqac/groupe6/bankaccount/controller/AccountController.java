@@ -2,6 +2,8 @@ package uqac.groupe6.bankaccount.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,8 +26,13 @@ public class AccountController {
 	private final AccountService accountService;
 
 	@PostMapping("/create")
-	public void create(@RequestBody AccountRequestModel requestModel) throws AccountNameAlreadyExistException {
-		accountService.create(requestModel);
+	public ResponseEntity create(@RequestBody AccountRequestModel requestModel) {
+		try {
+			accountService.create(requestModel);
+			return ResponseEntity.status(HttpStatus.CREATED).body("New account " + requestModel.getName() + " created");
+		} catch (AccountNameAlreadyExistException e) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+		}
 	}
 
 	@RequestMapping(value = "/customer/{id}", method = RequestMethod.GET)

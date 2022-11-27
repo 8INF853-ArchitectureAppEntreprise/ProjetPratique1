@@ -3,6 +3,7 @@ package uqac.groupe6.bankaccount.usecase;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
@@ -56,9 +57,13 @@ public class AccountGatewayImpl implements AccountGateway {
 	public Account findByCustomer_IdAndByName(Long idCustomer, String name) {
 		CustomerJpaEntity customerJpaEntity = customerJpaRepository.getById(idCustomer);
 
-		AccountJpaEntity toReturn = accountJpaRepository.findByCustomer_IdAndByName(customerJpaEntity, name);
+		Optional<AccountJpaEntity> accountOptional = accountJpaRepository.findByCustomerAndName(customerJpaEntity,
+				name);
 
-		return Account.builder().name(toReturn.getName()).build();
+		if (accountOptional.isPresent()) {
+			return Account.builder().name(accountOptional.get().getName()).build();
+		}
+		return null;
 	}
 
 }

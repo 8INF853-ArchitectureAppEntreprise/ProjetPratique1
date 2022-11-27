@@ -19,8 +19,9 @@ public class AccountServiceImpl implements AccountService {
 		Account accountAlreadyExist = accountGateway.findByCustomer_IdAndByName(requestModel.getIdCustomer(),
 				requestModel.getName());
 
-		if (accountAlreadyExist.getName().equals(requestModel.getName())) {
-			throw new AccountNameAlreadyExistException("Account with name " + requestModel.getName() + "already exist");
+		if (accountAlreadyExist != null && accountAlreadyExist.getName().equals(requestModel.getName())) {
+			throw new AccountNameAlreadyExistException(
+					"Account with name " + requestModel.getName() + " already exist");
 		}
 
 		accountGateway.create(requestModel.getIdCustomer(), requestModel.getName());
