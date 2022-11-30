@@ -5,12 +5,10 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import uqac.groupe6.registration.persistance.CustomerJpaEntity;
-
 public interface AccountJpaRepository extends JpaRepository<AccountJpaEntity, Long> {
-	List<AccountJpaEntity> findByCustomer_Id(long idCustomer);
+	List<AccountJpaEntity> findByCustomerId(Long idCustomer);
 
-	Optional<AccountJpaEntity> findByIdAndCustomer(long idAccount, CustomerJpaEntity customerJpaEntity);
+	Optional<AccountJpaEntity> findByIdAndCustomerId(long idAccount, Long idCustomer);
 
-	Optional<AccountJpaEntity> findByCustomerAndName(CustomerJpaEntity customerJpaEntity, String name);
+	Optional<AccountJpaEntity> findByCustomerIdAndName(Long idCustomer, String name);
 }
