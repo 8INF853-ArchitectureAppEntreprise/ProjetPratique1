@@ -26,8 +26,8 @@ public class AccountGatewayImpl implements AccountGateway {
 
 	@Override
 	public Account getOne(Long idCustomer, Long idAccount) {
-		return accountJpaRepository.findByIdAndCustomerId(idAccount, idCustomer).map(jpa -> {
-			return Account.builder().name(jpa.getName()).build();
+		return accountJpaRepository.findByIdAndCustomerId(idAccount, idCustomer).map(jpaAccount -> {
+			return Account.builder().name(jpaAccount.getName()).build();
 		}).orElse(null);
 	}
 
@@ -46,15 +46,9 @@ public class AccountGatewayImpl implements AccountGateway {
 
 	@Override
 	public Account findByCustomer_IdAndByName(Long idCustomer, String name) {
-//		CustomerJpaEntity customerJpaEntity = customerJpaRepository.getById(idCustomer);
-//
-//		Optional<AccountJpaEntity> accountOptional = accountJpaRepository.findByCustomerAndName(customerJpaEntity,
-//				name);
-//
-//		if (accountOptional.isPresent()) {
-//			return Account.builder().name(accountOptional.get().getName()).build();
-//		}
-		return null;
+		return accountJpaRepository.findByCustomerIdAndName(idCustomer, name).map(jpaAccount -> {
+			return Account.builder().name(jpaAccount.getName()).build();
+		}).orElse(null);
 	}
 
 }
