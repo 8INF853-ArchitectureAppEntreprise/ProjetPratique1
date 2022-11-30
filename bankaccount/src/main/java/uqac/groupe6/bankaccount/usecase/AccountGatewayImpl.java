@@ -1,5 +1,6 @@
 package uqac.groupe6.bankaccount.usecase;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,23 +19,16 @@ public class AccountGatewayImpl implements AccountGateway {
 
 	@Override
 	public void create(Long idCustomer, String accountName) {
-		// CustomerJpaEntity customerJpaEntity =
-		// customerJpaRepository.getById(idCustomer);
+		AccountJpaEntity accountJpaEntiry = new AccountJpaEntity(idCustomer, accountName, LocalDateTime.now());
 
-		// AccountJpaEntity accountJpaEntiry = new AccountJpaEntity(customerJpaEntity,
-		// accountName, LocalDateTime.now());
-
-		// accountJpaRepository.save(accountJpaEntiry);
+		accountJpaRepository.save(accountJpaEntiry);
 	}
 
 	@Override
 	public Account getOne(Long idCustomer, Long idAccount) {
-		// CustomerJpaEntity customerJpaEntity =
-		// customerJpaRepository.getById(idCustomer);
-
-		return null;
-		// return accountJpaRepository.findByIdAndCustomer(idAccount,
-		// customerJpaEntity);
+		return accountJpaRepository.findByIdAndCustomerId(idAccount, idCustomer).map(jpa -> {
+			return Account.builder().name(jpa.getName()).build();
+		}).orElse(null);
 	}
 
 	@Override
