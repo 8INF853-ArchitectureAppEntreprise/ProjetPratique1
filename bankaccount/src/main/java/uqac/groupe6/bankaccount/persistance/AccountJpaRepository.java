@@ -11,4 +11,6 @@ public interface AccountJpaRepository extends JpaRepository<AccountJpaEntity, Lo
 	Optional<AccountJpaEntity> findByIdAndCustomerId(long idAccount, Long idCustomer);
 
 	Optional<AccountJpaEntity> findByCustomerIdAndName(Long idCustomer, String name);
+
+	List<AccountJpaEntity> findByCustomerIdAndAccountType(Long idCustomer, AccountTypeJPAEnum accountType);
 }

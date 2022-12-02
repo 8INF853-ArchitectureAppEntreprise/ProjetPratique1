@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 import uqac.groupe6.bankaccount.domain.Account;
+import uqac.groupe6.bankaccount.domain.AccountType;
+import uqac.groupe6.bankaccount.usecase.exception.AccountDoestExistException;
 import uqac.groupe6.bankaccount.usecase.exception.AccountNameAlreadyExistException;
 
 @Service
@@ -16,7 +18,7 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public void create(AccountRequestModel requestModel) throws AccountNameAlreadyExistException {
-		Account accountAlreadyExist = accountGateway.findByCustomer_IdAndByName(requestModel.getIdCustomer(),
+		Account accountAlreadyExist = accountGateway.findByCustomerIdAndByName(requestModel.getIdCustomer(),
 				requestModel.getName());
 
 		if (accountAlreadyExist != null && accountAlreadyExist.getName().equals(requestModel.getName())) {
@@ -24,23 +26,63 @@ public class AccountServiceImpl implements AccountService {
 					"Account with name " + requestModel.getName() + " already exist");
 		}
 
-		accountGateway.create(requestModel.getIdCustomer(), requestModel.getName());
+		if (!requestModel.getAccountType().equals(AccountType.CHEQUE.name())
+				&& !requestModel.getAccountType().equals(AccountType.EPARGNE.name())) {
+			throw new IllegalArgumentException("The account type " + requestModel.getAccountType() + " doesn't exist");
+		}
+
+		accountGateway.create(requestModel.getIdCustomer(), requestModel.getName(),
+				AccountType.valueOf(requestModel.getAccountType()));
 	}
 
 	@Override
-	public AccountResponseModel loadOne(AccountRequestModel requestModel) {
-		Account account = accountGateway.getOne(requestModel.getIdCustomer(), requestModel.getIdAccount());
+	public void update(AccountRequestModel requestModel) throws AccountDoestExistException {
+		Account account = accountGateway.findByAccountId(requestModel.getIdAccount());
+
+		if (account == null) {
+			throw new AccountDoestExistException("Account to update doesn't exist");
+		}
+
+		accountGateway.updateName(requestModel.getIdAccount(), requestModel.getName());
+	}
+
+	@Override
+	public void delete(AccountRequestModel requestModel) throws AccountDoestExistException {
+		Account account = accountGateway.findByAccountId(requestModel.getIdAccount());
+
+		// Vérifier si le propriétaire du compte en BDD et celui qui fait la requete
+
+		if (account == null) {
+			throw new AccountDoestExistException("Account with name " + requestModel.getName() + " doesn't exist");
+		}
+
+		accountGateway.delete(requestModel.getIdAccount());
+	}
+
+	@Override
+	public AccountResponseModel getOneAccount(AccountRequestModel requestModel) {
+		Account account = accountGateway.findByCustomerIdAndAccountId(requestModel.getIdCustomer(),
+				requestModel.getIdAccount());
 		return accountToResponseModel(account);
 	}
 
 	@Override
-	public List<AccountResponseModel> loadAll(AccountRequestModel requestModel) {
-		List<Account> customerAccounts = accountGateway.getAll(requestModel.getIdCustomer());
+	public List<AccountResponseModel> getAllAccounts(AccountRequestModel requestModel) {
+		List<Account> customerAccounts = accountGateway.findAllAccounts(requestModel.getIdCustomer());
 
 		return customerAccounts.stream().map(account -> accountToResponseModel(account)).toList();
 	}
 
 	private AccountResponseModel accountToResponseModel(Account account) {
-		return AccountResponseModel.builder().name(account.getName()).build();
+		return AccountResponseModel.builder().name(account.getName()).accountType(account.getAccountType().name())
+				.build();
+	}
+
+	@Override
+	public List<AccountResponseModel> getAllAccountType(AccountRequestModel requestModel) {
+		List<Account> accounts = accountGateway.findByCustomerIdAndAccountType(requestModel.getIdCustomer(),
+				AccountType.valueOf(requestModel.getAccountType()));
+
+		return accounts.stream().map(account -> accountToResponseModel(account)).toList();
 	}
 }

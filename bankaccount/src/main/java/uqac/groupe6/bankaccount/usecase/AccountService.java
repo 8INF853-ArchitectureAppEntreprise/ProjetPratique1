@@ -2,12 +2,19 @@ package uqac.groupe6.bankaccount.usecase;
 
 import java.util.List;
 
+import uqac.groupe6.bankaccount.usecase.exception.AccountDoestExistException;
 import uqac.groupe6.bankaccount.usecase.exception.AccountNameAlreadyExistException;
 
 public interface AccountService {
-	public void create(AccountRequestModel requestModel) throws AccountNameAlreadyExistException;
+	void create(AccountRequestModel requestModel) throws AccountNameAlreadyExistException;
 
-	public AccountResponseModel loadOne(AccountRequestModel requestModel);
+	void update(AccountRequestModel requestModel) throws AccountDoestExistException;
 
-	public List<AccountResponseModel> loadAll(AccountRequestModel requestModel);
+	void delete(AccountRequestModel requestModel) throws AccountDoestExistException;
+
+	AccountResponseModel getOneAccount(AccountRequestModel requestModel);
+
+	List<AccountResponseModel> getAllAccounts(AccountRequestModel requestModel);
+
+	List<AccountResponseModel> getAllAccountType(AccountRequestModel requestModel);
 }

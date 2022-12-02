@@ -11,4 +11,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AccountResponseModel {
 	private String name;
+	private String accountType;
 }

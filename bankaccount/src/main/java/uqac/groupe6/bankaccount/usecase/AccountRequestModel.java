@@ -13,4 +13,5 @@ public class AccountRequestModel {
 	private Long idCustomer;
 	private Long idAccount;
 	private String name;
+	private String accountType;
 }
