@@ -31,7 +31,7 @@ public class BalanceJPAEntity {
 	private long id;
 
 	@NonNull
-	private double ammount;
+	private double amount;
 
 	@ElementCollection
 	@CollectionTable(name = "transaction", joinColumns = @JoinColumn(name = "id"))

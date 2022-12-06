@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import lombok.AllArgsConstructor;
 import uqac.groupe6.bankaccount.domain.Account;
 import uqac.groupe6.bankaccount.domain.AccountType;
+import uqac.groupe6.bankaccount.domain.Balance;
 import uqac.groupe6.bankaccount.persistance.AccountJpaEntity;
 import uqac.groupe6.bankaccount.persistance.AccountJpaRepository;
 import uqac.groupe6.bankaccount.persistance.AccountTypeJPAEnum;
@@ -58,14 +59,9 @@ public class AccountGatewayImpl implements AccountGateway {
 	public List<Account> findAllAccounts(Long idCustomer) {
 		List<Account> toReturn = new ArrayList<>();
 		for (AccountJpaEntity accountJpaEntity : accountJpaRepository.findByCustomerId(idCustomer)) {
-			toReturn.add(jpaToDomain(accountJpaEntity));
+			toReturn.add(accountJpaToDomain(accountJpaEntity));
 		}
 		return toReturn;
-	}
-
-	private Account jpaToDomain(AccountJpaEntity jpaEntity) {
-		return Account.builder().name(jpaEntity.getName())
-				.accountType(AccountType.valueOf(jpaEntity.getAccountType().name())).build();
 	}
 
 	@Override
@@ -80,9 +76,18 @@ public class AccountGatewayImpl implements AccountGateway {
 		List<Account> toReturn = new ArrayList<>();
 		for (AccountJpaEntity accountJpaRepository : accountJpaRepository.findByCustomerIdAndAccountType(customerId,
 				AccountTypeJPAEnum.valueOf(accountType.name()))) {
-			toReturn.add(jpaToDomain(accountJpaRepository));
+			toReturn.add(accountJpaToDomain(accountJpaRepository));
 		}
 		return toReturn;
 	}
 
+	private Account accountJpaToDomain(AccountJpaEntity jpaEntity) {
+		return Account.builder().name(jpaEntity.getName())
+				.accountType(AccountType.valueOf(jpaEntity.getAccountType().name()))
+				.balance(balanceJpaToDomain(jpaEntity.getBalanceJPAEntity())).build();
+	}
+
+	private Balance balanceJpaToDomain(BalanceJPAEntity jpaEntity) {
+		return Balance.builder().amount(jpaEntity.getAmount()).build();
+	}
 }

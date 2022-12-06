@@ -50,8 +50,6 @@ public class AccountServiceImpl implements AccountService {
 	public void delete(AccountRequestModel requestModel) throws AccountDoestExistException {
 		Account account = accountGateway.findByAccountId(requestModel.getIdAccount());
 
-		// Vérifier si le propriétaire du compte en BDD et celui qui fait la requete
-
 		if (account == null) {
 			throw new AccountDoestExistException("Account with name " + requestModel.getName() + " doesn't exist");
 		}
@@ -63,19 +61,14 @@ public class AccountServiceImpl implements AccountService {
 	public AccountResponseModel getOneAccount(AccountRequestModel requestModel) {
 		Account account = accountGateway.findByCustomerIdAndAccountId(requestModel.getIdCustomer(),
 				requestModel.getIdAccount());
-		return accountToResponseModel(account);
+		return domainToResponseModel(account);
 	}
 
 	@Override
 	public List<AccountResponseModel> getAllAccounts(AccountRequestModel requestModel) {
 		List<Account> customerAccounts = accountGateway.findAllAccounts(requestModel.getIdCustomer());
 
-		return customerAccounts.stream().map(account -> accountToResponseModel(account)).toList();
-	}
-
-	private AccountResponseModel accountToResponseModel(Account account) {
-		return AccountResponseModel.builder().name(account.getName()).accountType(account.getAccountType().name())
-				.build();
+		return customerAccounts.stream().map(account -> domainToResponseModel(account)).toList();
 	}
 
 	@Override
@@ -83,6 +76,11 @@ public class AccountServiceImpl implements AccountService {
 		List<Account> accounts = accountGateway.findByCustomerIdAndAccountType(requestModel.getIdCustomer(),
 				AccountType.valueOf(requestModel.getAccountType()));
 
-		return accounts.stream().map(account -> accountToResponseModel(account)).toList();
+		return accounts.stream().map(account -> domainToResponseModel(account)).toList();
+	}
+
+	private AccountResponseModel domainToResponseModel(Account account) {
+		return AccountResponseModel.builder().name(account.getName()).accountType(account.getAccountType().name())
+				.balanceAmount(account.getBalance().getAmount()).build();
 	}
 }
