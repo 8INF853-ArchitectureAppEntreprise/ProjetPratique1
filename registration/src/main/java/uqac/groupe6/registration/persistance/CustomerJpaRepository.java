@@ -6,7 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CustomerJpaRepository extends JpaRepository<CustomerJpaEntity, Long> {
-	Optional<CustomerJpaEntity> findByEmail(String email);
+public interface CustomerJpaRepository extends JpaRepository<UserJPAEntity, Long> {
+	Optional<UserJPAEntity> findByEmail(String email);
 
+	Optional<UserJPAEntity> findByUsername(String username);
 }

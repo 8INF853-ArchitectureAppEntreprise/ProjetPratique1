@@ -1,5 +1,7 @@
 package uqac.groupe6.registration.usecase;
 
 public interface RegisterCustomerService {
-	void register(RegisterCustomerDTO dto);
+	void register(RegisterCustomerDTO registerCustomerDTO);
+
+	boolean isUserPresent(RegisterCustomerDTO registerCustomerDTO);
 }
