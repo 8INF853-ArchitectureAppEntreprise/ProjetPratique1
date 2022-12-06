@@ -4,7 +4,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uqac.groupe6.connection.domain.User;
+import uqac.groupe6.connection.usecase.ConnectionCustomService;
 import uqac.groupe6.connection.usecase.ConnectionRequestModel;
+import uqac.groupe6.connection.usecase.exception.ConnectionNoID;
+import uqac.groupe6.connection.usecase.exception.ConnectionNoUser;
+import uqac.groupe6.connection.usecase.exception.ConnectionPasswordWrong;
 
 @RestController
 @RequestMapping("/customer")
@@ -12,27 +17,18 @@ import uqac.groupe6.connection.usecase.ConnectionRequestModel;
 
 public class ConnectionController {
 
-    @PostMapping("/connection")
-    ResponseEntity create(@RequestBody ConnectionRequestModel requestModel) {
-        if(requestModel.getEmail() == null && requestModel.getPhoneNumber() == null){
-            return ResponseEntity.status(HttpStatus.CREATED).body("Pas d'email");
+    private final ConnectionCustomService customerService;
+    @PostMapping("/login")
+    ResponseEntity login(@RequestBody ConnectionRequestModel requestModel) {
 
+
+        User user = null;
+        try {
+            user = customerService.login(requestModel);
+            return ResponseEntity.status(HttpStatus.CREATED).body(user.toString());
+        } catch (ConnectionNoID | ConnectionNoUser | ConnectionPasswordWrong e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
         }
-        if(requestModel.getPassword() == null){
-            return ResponseEntity.status(HttpStatus.CREATED).body("Pas de mdp");
-
-        }
-        if(requestModel.getPhoneNumber() == null){
-            return ResponseEntity.status(HttpStatus.CREATED).body("Pas de tel");
-
-        }
-       // try {
-       //     customerService.register(requestModel);
-       // } catch (RegistrationMailAlreadyExist | RegistrationPhoneNumberAlreadyExist e) {
-       //     return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
-       // }
-        return ResponseEntity.status(HttpStatus.CREATED).body("New account created");
-
     }
 
     @GetMapping
