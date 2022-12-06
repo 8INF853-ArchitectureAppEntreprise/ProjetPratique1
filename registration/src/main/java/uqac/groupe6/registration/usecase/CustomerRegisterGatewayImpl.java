@@ -23,6 +23,8 @@ public class CustomerRegisterGatewayImpl implements CustomerRegisterGateway {
 				customerRepositoryDTO.getPassword(), LocalDateTime.now(), customerRepositoryDTO.getFirstName(),
 				customerRepositoryDTO.getLastName(), customerRepositoryDTO.getPhoneNumber());
 
+
+
 		customerJpaRepository.save(customerJpaEntity);
 	}
 
@@ -30,4 +32,7 @@ public class CustomerRegisterGatewayImpl implements CustomerRegisterGateway {
 		return !customerJpaRepository.findByEmail(email).isEmpty();
 	}
 
+	public boolean existsByPhoneNumber(String phoneNumber){
+		return !customerJpaRepository.findByPhoneNumber(phoneNumber).isEmpty();
+	}
 }

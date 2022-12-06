@@ -5,4 +5,6 @@ public interface CustomerRegisterGateway {
 
 	boolean existsByEmail(String email);
 
+	boolean existsByPhoneNumber(String phoneNumber);
+
 }
