@@ -7,4 +7,9 @@ public interface CustomerRegisterGateway {
 
 	boolean existsByPhoneNumber(String phoneNumber);
 
+	boolean existsById(Long id);
+
+	boolean pwdMatchBdd(String pwd, Long id);
+
+	void update(RegisterCustomerDTO dto, Long id);
 }

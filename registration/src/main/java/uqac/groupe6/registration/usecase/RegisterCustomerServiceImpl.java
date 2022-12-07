@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 import uqac.groupe6.registration.usecase.exception.RegistrationMDPmatch;
 import uqac.groupe6.registration.usecase.exception.RegistrationMailAlreadyExist;
+import uqac.groupe6.registration.usecase.exception.RegistrationNoCustomerExist;
 import uqac.groupe6.registration.usecase.exception.RegistrationPhoneNumberAlreadyExist;
 
 @AllArgsConstructor
@@ -17,7 +18,7 @@ public class RegisterCustomerServiceImpl implements RegisterCustomerService {
 
 	@Override
 	public void register(RegisterCustomerDTO dto) throws RegistrationMailAlreadyExist, RegistrationPhoneNumberAlreadyExist, RegistrationMDPmatch {
-		if(!dto.getMatchedPassword().equals(dto.getPassword())){
+		if(!dto.getNewPassword().equals(dto.getPassword())){
 			throw new RegistrationMDPmatch(
 					"Password don't match");
 
@@ -32,6 +33,20 @@ public class RegisterCustomerServiceImpl implements RegisterCustomerService {
 		}
 
 		customerRegisterGateway.save(dto);
+	}
+
+	@Override
+	public void update(RegisterCustomerDTO dto, Long id) throws RegistrationNoCustomerExist, RegistrationMDPmatch {
+		if(!customerRegisterGateway.existsById(id)){
+			throw new RegistrationNoCustomerExist("No customer exist for this id");
+		}
+
+		if(!customerRegisterGateway.pwdMatchBdd(dto.getPassword(),id)){
+			throw new RegistrationMDPmatch("Password don't match");
+		}
+
+		customerRegisterGateway.update(dto,id);
+
 	}
 
 }

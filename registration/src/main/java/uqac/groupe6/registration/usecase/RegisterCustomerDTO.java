@@ -13,7 +13,7 @@ import lombok.Setter;
 public class RegisterCustomerDTO {
 	private String email;
 	private String password;
-	private String matchedPassword;
+	private String newPassword;
 	private String firstName;
 	private String lastName;
 	private String phoneNumber;
