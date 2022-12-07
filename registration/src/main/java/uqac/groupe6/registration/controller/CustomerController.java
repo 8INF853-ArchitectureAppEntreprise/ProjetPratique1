@@ -9,6 +9,7 @@ import uqac.groupe6.registration.usecase.RegisterCustomerDTO;
 import uqac.groupe6.registration.usecase.RegisterCustomerService;
 import uqac.groupe6.registration.usecase.exception.RegistrationMDPmatch;
 import uqac.groupe6.registration.usecase.exception.RegistrationMailAlreadyExist;
+import uqac.groupe6.registration.usecase.exception.RegistrationNoCustomerExist;
 import uqac.groupe6.registration.usecase.exception.RegistrationPhoneNumberAlreadyExist;
 
 import java.util.List;
@@ -27,6 +28,18 @@ public class CustomerController {
 			customerService.register(requestModel);
 			return ResponseEntity.status(HttpStatus.CREATED).body("New account created");
 		} catch (RegistrationMailAlreadyExist | RegistrationPhoneNumberAlreadyExist | RegistrationMDPmatch e) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+		}
+	}
+
+	@PutMapping("/update/{id}")
+	public ResponseEntity update(@PathVariable("id") Long idCustomer, @RequestBody RegisterCustomerDTO dto) {
+		//requestModel.setIdAccount(idAccount);
+
+		try {
+			customerService.update(dto, idCustomer);
+			return ResponseEntity.status(HttpStatus.CREATED).body("Customer with id: " + idCustomer + " is update");
+		} catch (RegistrationNoCustomerExist | RegistrationMDPmatch e) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
 		}
 	}

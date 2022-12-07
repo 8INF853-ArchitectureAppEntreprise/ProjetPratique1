@@ -28,6 +28,21 @@ public class CustomerRegisterGatewayImpl implements CustomerRegisterGateway {
 		customerJpaRepository.save(customerJpaEntity);
 	}
 
+	public void update(RegisterCustomerDTO dto, Long id){
+		CustomerJpaEntity customerJpa = customerJpaRepository.findById(id).get();
+
+		if(dto.getNewPassword() != null)
+			customerJpa.setPassword(dto.getNewPassword());
+
+		if(dto.getEmail() != null)
+			customerJpa.setEmail(dto.getEmail());
+
+		if(dto.getPhoneNumber() != null)
+			customerJpa.setPhoneNumber(dto.getPhoneNumber());
+
+		customerJpaRepository.save(customerJpa);
+	}
+
 	public boolean existsByEmail(String email) {
 		return !customerJpaRepository.findByEmail(email).isEmpty();
 	}
@@ -35,4 +50,17 @@ public class CustomerRegisterGatewayImpl implements CustomerRegisterGateway {
 	public boolean existsByPhoneNumber(String phoneNumber){
 		return !customerJpaRepository.findByPhoneNumber(phoneNumber).isEmpty();
 	}
+
+	@Override
+	public boolean existsById(Long id) {
+		return !customerJpaRepository.findById(id).isEmpty();
+	}
+
+	@Override
+	public boolean pwdMatchBdd(String pwd, Long id) {
+		CustomerJpaEntity customerJpa = customerJpaRepository.findById(id).get();
+
+		return pwd.equals(customerJpa.getPassword());
+	}
+
 }
