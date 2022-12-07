@@ -5,7 +5,7 @@ import uqac.groupe6.registration.domain.User;
 public interface CustomerRegisterGateway {
 	void save(User user);
 
-	boolean existsByEmail(String email);
+	User findByEmail(String email);
 
 	User findByUsername(String username);
 

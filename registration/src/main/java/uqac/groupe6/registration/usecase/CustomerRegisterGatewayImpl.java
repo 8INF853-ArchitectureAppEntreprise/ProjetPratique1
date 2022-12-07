@@ -1,6 +1,6 @@
 package uqac.groupe6.registration.usecase;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,22 +12,16 @@ import uqac.groupe6.registration.persistance.UserJPAEntity;
 @Getter
 @Setter
 @AllArgsConstructor
-@Component
+@Service
 public class CustomerRegisterGatewayImpl implements CustomerRegisterGateway {
 
 	private final CustomerJpaRepository customerJpaRepository;
 
 	public void save(User user) {
-		String username = user.getLastName() + "_" + user.getFirstName();
-
 		UserJPAEntity userJPAEntity = new UserJPAEntity(user.getFirstName(), user.getLastName(), user.getEmail(),
-				username, user.getPassword(), user.getPhoneNumber(), user.getRole());
+				user.getEmail(), user.getPassword(), user.getPhoneNumber(), user.getRole());
 
 		customerJpaRepository.save(userJPAEntity);
-	}
-
-	public boolean existsByEmail(String email) {
-		return !customerJpaRepository.findByEmail(email).isEmpty();
 	}
 
 	@Override
@@ -37,8 +31,17 @@ public class CustomerRegisterGatewayImpl implements CustomerRegisterGateway {
 		}).orElse(null);
 	}
 
-	private User jpaToDomain(UserJPAEntity user) {
-		return null;
+	@Override
+	public User findByEmail(String email) {
+		return customerJpaRepository.findByEmail(email).map(jpa -> {
+			return jpaToDomain(jpa);
+		}).orElse(null);
+	}
+
+	private User jpaToDomain(UserJPAEntity jpaEntity) {
+		return User.builder().email(jpaEntity.getEmail()).firstName(jpaEntity.getFirstName())
+				.lastName(jpaEntity.getLastName()).password(jpaEntity.getPassword()).phoneNumber(jpaEntity.getMobile())
+				.role(jpaEntity.getRole()).username(jpaEntity.getUsername()).build();
 	}
 
 }
