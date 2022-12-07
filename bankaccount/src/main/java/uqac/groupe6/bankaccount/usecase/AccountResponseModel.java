@@ -12,4 +12,5 @@ import lombok.Setter;
 public class AccountResponseModel {
 	private String name;
 	private String accountType;
+	private double balanceAmount;
 }
