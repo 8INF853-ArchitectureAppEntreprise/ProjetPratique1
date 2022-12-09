@@ -1,4 +1,4 @@
-package uqac.groupe6.registration.controller;
+package uqac.groupe6.registration.security;
 
 import java.io.IOException;
 import java.util.ArrayList;

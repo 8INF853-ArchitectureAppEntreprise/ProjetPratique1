@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
+import uqac.groupe6.registration.security.JwtUtil;
 import uqac.groupe6.registration.usecase.LoginDTO;
 import uqac.groupe6.registration.usecase.RegisterCustomerDTO;
 import uqac.groupe6.registration.usecase.RegisterCustomerService;

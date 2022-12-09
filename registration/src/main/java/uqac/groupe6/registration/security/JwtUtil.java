@@ -1,4 +1,4 @@
-package uqac.groupe6.registration.controller;
+package uqac.groupe6.registration.security;
 
 import java.security.Key;
 import java.util.Date;
@@ -18,7 +18,7 @@ public class JwtUtil {
 	private final static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
 	public String generate(String username) {
-		return Jwts.builder().setSubject(username).setIssuer("backendstory.com")
+		return Jwts.builder().setSubject(username).setIssuer("prixbanque.com")
 				.setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + expireInMs)).signWith(key).compact();
 	}

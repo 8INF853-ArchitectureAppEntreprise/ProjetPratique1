@@ -24,8 +24,8 @@ import uqac.groupe6.registration.domain.Role;
 @Setter
 @Getter
 @Entity
-@Table(name = "users")
-public class UserJPAEntity {
+@Table(name = "customer")
+public class CustomerJPAEntity {
 	@SequenceGenerator(name = "users_sequence", sequenceName = "users_sequence", allocationSize = 1)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_sequence")
@@ -44,10 +44,6 @@ public class UserJPAEntity {
 	private String email;
 
 	@NonNull
-	@Column(name = "username", unique = true)
-	private String username;
-
-	@NonNull
 	@Column(name = "password")
 	private String password;
 
@@ -55,20 +51,16 @@ public class UserJPAEntity {
 	@Column(name = "mobile", unique = true)
 	private String mobile;
 
-	@Column(name = "created_at", updatable = false)
-	private LocalDateTime createdAt;
-
-	@Column(name = "updated_at")
-	private LocalDateTime updatedAt;
-
 	@NonNull
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
-	@Column(name = "locked")
-	private Boolean locked = false;
+	@Column(name = "created_at", updatable = false)
+	@NonNull
+	private LocalDateTime createdAt;
 
-	@Column(name = "enabled")
-	private Boolean enabled = true;
+	@Column(name = "updated_at")
+	@NonNull
+	private LocalDateTime updatedAt;
 
 }

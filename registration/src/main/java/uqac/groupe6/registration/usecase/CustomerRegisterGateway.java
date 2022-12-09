@@ -1,12 +1,9 @@
 package uqac.groupe6.registration.usecase;
 
-import uqac.groupe6.registration.domain.User;
+import uqac.groupe6.registration.domain.Customer;
 
 public interface CustomerRegisterGateway {
-	void save(User user);
+	void save(Customer user);
 
-	User findByEmail(String email);
-
-	User findByUsername(String username);
-
+	Customer findByEmail(String email);
 }

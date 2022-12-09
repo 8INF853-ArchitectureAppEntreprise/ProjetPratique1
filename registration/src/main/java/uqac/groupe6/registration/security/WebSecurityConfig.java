@@ -1,4 +1,4 @@
-package uqac.groupe6.registration;
+package uqac.groupe6.registration.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,7 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import lombok.AllArgsConstructor;
-import uqac.groupe6.registration.controller.JwtTokenFilter;
 
 @Configuration
 @EnableWebSecurity
