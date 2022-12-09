@@ -45,6 +45,11 @@ public class CustomerController {
 		return ResponseEntity.ok(jwt);
 	}
 
+	@GetMapping("/rien")
+	public String rien() {
+		return "Autre page";
+	}
+
 	@GetMapping
 	public String mainPage() {
 		return "main page customer";

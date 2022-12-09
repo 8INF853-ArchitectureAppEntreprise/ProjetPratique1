@@ -12,8 +12,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import lombok.AllArgsConstructor;
+import uqac.groupe6.registration.controller.JwtTokenFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -26,6 +28,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Qualifier("registerCustomerServiceImpl")
 	@Autowired
 	private UserDetailsService registerCustomerService;
+
+	@Autowired
+	private JwtTokenFilter jwtTokenFilter;
 
 	@Bean
 	public AuthenticationManager getAuthenticationManager() throws Exception {
@@ -42,5 +47,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable().authorizeRequests().antMatchers("/customer/login", "/customer/register").permitAll()
 				.anyRequest().authenticated().and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+		// adding the custom filter before UsernamePasswordAuthenticationFilter in the
+		// filter chain
+		http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 }
