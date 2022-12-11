@@ -43,9 +43,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers("/customer/login", "/customer/register").permitAll()
-				.anyRequest().authenticated().and().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http.csrf().disable().authorizeRequests().antMatchers("/customer/**").permitAll().anyRequest().authenticated()
+				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 		// adding the custom filter before UsernamePasswordAuthenticationFilter in the
 		// filter chain

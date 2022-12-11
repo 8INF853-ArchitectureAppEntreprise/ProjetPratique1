@@ -52,13 +52,8 @@ public class CustomerController {
 		return ResponseEntity.ok(jwtUtil.validate(token));
 	}
 
-	@GetMapping("/rien")
-	public String rien() {
-		return "Autre page";
-	}
-
 	@GetMapping
-	public String mainPage() {
-		return "main page customer";
+	public String hello() {
+		return "Welcome to Registration";
 	}
 }
