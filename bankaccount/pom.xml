@@ -9,16 +9,6 @@
 
 
 	<dependencies>
-		<!-- MicroService -->
-		<dependency>
-			<groupId>uqac.groupe6</groupId>
-			<artifactId>connection</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>uqac.groupe6</groupId>
-			<artifactId>registration</artifactId>
-		</dependency>
-	
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -33,6 +23,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+<!--		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+-->
 
 
 		<!-- Base de données -->

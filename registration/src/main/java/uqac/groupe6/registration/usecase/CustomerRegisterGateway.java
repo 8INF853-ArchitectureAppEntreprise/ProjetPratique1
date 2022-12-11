@@ -1,15 +1,19 @@
 package uqac.groupe6.registration.usecase;
 
-public interface CustomerRegisterGateway {
-	void save(RegisterCustomerDTO customerRepositoryDTO);
+import uqac.groupe6.registration.domain.Customer;
 
-	boolean existsByEmail(String email);
+public interface CustomerRegisterGateway {
+	void save(Customer user);
 
 	boolean existsByPhoneNumber(String phoneNumber);
 
 	boolean existsById(Long id);
 
+	boolean existsByEmail(String email);
+
 	boolean pwdMatchBdd(String pwd, Long id);
 
 	void update(RegisterCustomerDTO dto, Long id);
+
+	Customer findByEmail(String email);
 }
