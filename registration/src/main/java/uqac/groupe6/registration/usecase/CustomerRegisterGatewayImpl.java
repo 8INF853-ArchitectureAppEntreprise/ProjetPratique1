@@ -58,7 +58,7 @@ public class CustomerRegisterGatewayImpl implements CustomerRegisterGateway {
 
 	@Override
 	public boolean existsByPhoneNumber(String phoneNumber) {
-		return !customerJpaRepository.findByPhoneNumber(phoneNumber).isEmpty();
+		return !customerJpaRepository.findByMobile(phoneNumber).isEmpty();
 	}
 
 	@Override

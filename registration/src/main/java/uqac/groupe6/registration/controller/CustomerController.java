@@ -79,4 +79,9 @@ public class CustomerController {
 	public String hello() {
 		return "Welcome to Registration";
 	}
+
+	@GetMapping("/restricted")
+	public String retricted() {
+		return "Welcome to Restricted page";
+	}
 }

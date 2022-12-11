@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface CustomerJpaRepository extends JpaRepository<CustomerJpaEntity, Long> {
 	Optional<CustomerJpaEntity> findByEmail(String email);
 
-	Optional<CustomerJpaEntity> findByPhoneNumber(String phoneNumber);
+	Optional<CustomerJpaEntity> findByMobile(String mobile);
 
 	Optional<CustomerJpaEntity> findById(Long idCustomer);
 }
