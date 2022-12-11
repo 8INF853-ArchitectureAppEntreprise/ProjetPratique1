@@ -20,7 +20,6 @@
 		<module>banktransfert</module>
 		<module>bankaccount</module>
 		<module>registration</module>
-		<module>connection</module>
 		<module>gateway</module>
 	</modules>
 

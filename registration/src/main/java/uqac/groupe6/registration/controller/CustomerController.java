@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
@@ -44,6 +45,11 @@ public class CustomerController {
 		// we can generate a JWT token and give it to user.
 		String jwt = jwtUtil.generate(loginDTO.getEmail());
 		return ResponseEntity.ok(jwt);
+	}
+
+	@PostMapping("/validateToken")
+	public ResponseEntity<Boolean> validateToken(@RequestParam String token) {
+		return ResponseEntity.ok(jwtUtil.validate(token));
 	}
 
 	@GetMapping("/rien")
