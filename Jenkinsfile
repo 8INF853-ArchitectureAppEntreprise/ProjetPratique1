@@ -21,10 +21,10 @@ pipeline {
         }
 
 
-        stage ('Deployment Stage') {
+        stage ('Intalling Stage') {
             steps {
                 withMaven(maven : 'maven_3_8_6') {
-                    bat 'mvn deploy'
+                    bat 'mvn install'
                 }
             }
         }
