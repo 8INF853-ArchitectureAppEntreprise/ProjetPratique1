@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Virement</title>
+    <link href="inc/sign_up.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<!-- Body of Form starts -->
+<div class="container">
+    <form method="post" autocomplete="on">
+
+        <!---Email ID---->
+        <div class="box">
+            <label for="email" class="fl fontLabel"> Montant : </label>
+            <div class="fl iconBox"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+            <div class="fr">
+                <input type="email" required name="email" placeholder="0.00€" class="textBox">
+            </div>
+            <div class="clr"></div>
+        </div>
+        <!--Email ID----->
+
+        <!--First name-->
+        <div class="box">
+            <label for="firstName" class="fl fontLabel"> Depuis : </label>
+            <div class="new iconBox">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </div>
+            <div class="fr">
+                <input type="text" name="firstName" placeholder="RIB / IBAN"
+                       class="textBox" autofocus="on" required>
+            </div>
+            <div class="clr"></div>
+        </div>
+        <!--First name-->
+
+
+        <!--Second name-->
+        <div class="box">
+            <label for="secondName" class="fl fontLabel"> Vers : </label>
+            <div class="fl iconBox"><i class="fa fa-user" aria-hidden="true"></i></div>
+            <div class="fr">
+                <input type="text" required name="secondName"
+                       placeholder="RIB / IBAN" class="textBox">
+            </div>
+            <div class="clr"></div>
+        </div>
+        <!--Second name-->
+
+
+        <!--Terms and Conditions------>
+        <div class="box terms">
+            <input type="checkbox" name="Terms" required> Je confirme le virement
+        </div>
+        <!--Terms and Conditions------>
+
+        <!---Submit Button------>
+        <div class="box" style="background: #2d3e3f">
+            <input type="Submit" name="Submit" class="submit" value="CONFIRMER">
+        </div>
+        <!---Submit Button----->
+    </form>
+</div>
+<!--Body of Form ends--->
+</body>
+</html>

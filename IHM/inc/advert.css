@@ -1,0 +1,24 @@
+
+/* advertisment link styles */
+
+#advert { 
+padding:9px 10px;background:inherit; border-top:1px solid #ccc;border-bottom:1px solid #ccc;font-size:10px;
+line-height:13px;color:#919191; }
+
+#advert .adverttitle {
+display:block;margin-top:10px;padding:2px 0 4px 20px;background:url(../images/advertup.gif) no-repeat 0 3px;
+font-size:12px;line-height:16px;font-weight:bold;text-decoration:underline;color:#333;
+}
+
+#advert .adverttitle:hover {text-decoration:none;color:#202b31;
+background:url(../images/advertover.gif) no-repeat 0 3px;}
+
+#advert .advertdescription {background:none;text-decoration:none;color:#000;}
+
+#advert .adverthost {background:none;margin-left:5px;font-size:10px;text-decoration:underline;color:#999;}
+
+#advert .advert:hover {text-decoration:none;color:#5f1f1c;}
+
+
+
+
